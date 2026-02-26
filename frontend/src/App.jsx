@@ -9,7 +9,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="pt-24 px-6 bg-base-200 min-h-screen">
+      <div className="pt-24 px-4 md:px-8 bg-base-200 min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add" element={<AddHotel />} />

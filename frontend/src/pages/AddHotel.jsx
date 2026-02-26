@@ -25,7 +25,9 @@ export default function AddHotel() {
     try {
       await api.post("/hotels", {
         ...form,
-        images: form.images.split(",")
+        images: form.images
+          ? form.images.split(",").map((url) => url.trim())
+          : []
       });
 
       toast.success("Hotel added successfully 🎉");
@@ -55,6 +57,7 @@ export default function AddHotel() {
 
           <input
             name="title"
+            value={form.title}
             placeholder="Hotel Name"
             className="input input-bordered input-lg w-full text-lg"
             onChange={handleChange}
@@ -64,6 +67,7 @@ export default function AddHotel() {
           <input
             name="price"
             type="number"
+            value={form.price}
             placeholder="Price"
             className="input input-bordered input-lg w-full text-lg"
             onChange={handleChange}
@@ -72,6 +76,7 @@ export default function AddHotel() {
 
           <input
             name="location"
+            value={form.location}
             placeholder="Location"
             className="input input-bordered input-lg w-full text-lg"
             onChange={handleChange}
@@ -80,6 +85,7 @@ export default function AddHotel() {
 
           <select
             name="category"
+            value={form.category}
             className="select select-bordered select-lg w-full text-lg"
             onChange={handleChange}
             required
@@ -94,6 +100,7 @@ export default function AddHotel() {
 
           <textarea
             name="description"
+            value={form.description}
             placeholder="Description"
             className="textarea textarea-bordered textarea-lg md:col-span-2 w-full text-lg"
             onChange={handleChange}
@@ -102,6 +109,7 @@ export default function AddHotel() {
 
           <input
             name="images"
+            value={form.images}
             placeholder="Image URLs (comma separated)"
             className="input input-bordered input-lg md:col-span-2 w-full text-lg"
             onChange={handleChange}
@@ -111,7 +119,7 @@ export default function AddHotel() {
             type="submit"
             className="btn btn-primary btn-lg md:col-span-2 
                        text-xl font-semibold 
-                       hover:scale-105 transition duration-300"
+                       hover:scale-105 transition duration-300 gap-2"
           >
             <Save size={24} />
             Add Hotel

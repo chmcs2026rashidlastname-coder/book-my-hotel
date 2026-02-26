@@ -20,8 +20,13 @@ export default function Home() {
 
   const navigate = useNavigate();
 
+  // ✅ Debounced fetch (prevents API spam)
   useEffect(() => {
-    fetchHotels();
+    const delayDebounce = setTimeout(() => {
+      fetchHotels();
+    }, 500);
+
+    return () => clearTimeout(delayDebounce);
   }, [search, location, category]);
 
   const fetchHotels = async () => {
@@ -138,7 +143,7 @@ export default function Home() {
                       }
                       alt="hotel"
                       className="w-full aspect-[4/3] object-cover 
-               hover:scale-110 transition duration-700"
+                                 hover:scale-110 transition duration-700"
                     />
                   </figure>
 
@@ -167,10 +172,11 @@ export default function Home() {
                         {hotel.location}
                       </span>
                     </div>
+
                     <div className="mt-4 pt-4 border-t border-base-300 text-xs">
 
                       <div className="flex justify-between items-center mb-1">
-                        <span className="flex items-center gap-1 text-base-content/70">
+                        <span className="text-base-content/70">
                           📅 Created
                         </span>
                         <span className="font-medium text-base-content/80">
@@ -179,7 +185,7 @@ export default function Home() {
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="flex items-center gap-1 text-base-content/70">
+                        <span className="text-base-content/70">
                           🔄 Updated
                         </span>
                         <span className="font-medium text-base-content/80">
@@ -189,55 +195,37 @@ export default function Home() {
 
                     </div>
 
-
+                    {/* ✅ CLEAN TOOLTIP BUTTONS */}
                     <div className="flex items-center gap-5 mt-6">
 
-                      <div className="relative group">
+                      <div className="tooltip tooltip-top" data-tip="View">
                         <button
+                          aria-label="View Hotel"
                           className="btn btn-sm btn-info btn-outline rounded-full p-2"
                           onClick={() => navigate(`/hotel/${hotel._id}`)}
                         >
                           <Eye size={18} />
                         </button>
-
-                        <span className="absolute -top-10 left-1/2 -translate-x-1/2 
-                     bg-black text-white text-xs px-2 py-1 
-                     rounded opacity-0 group-hover:opacity-100 
-                     transition pointer-events-none">
-                          View
-                        </span>
                       </div>
 
-                      <div className="relative group">
+                      <div className="tooltip tooltip-top" data-tip="Edit">
                         <button
+                          aria-label="Edit Hotel"
                           className="btn btn-sm btn-success btn-outline rounded-full p-2"
                           onClick={() => navigate(`/edit/${hotel._id}`)}
                         >
                           <Pencil size={18} />
                         </button>
-
-                        <span className="absolute -top-10 left-1/2 -translate-x-1/2 
-                     bg-black text-white text-xs px-2 py-1 
-                     rounded opacity-0 group-hover:opacity-100 
-                     transition pointer-events-none">
-                          Edit
-                        </span>
                       </div>
 
-                      <div className="relative group">
+                      <div className="tooltip tooltip-top" data-tip="Delete">
                         <button
+                          aria-label="Delete Hotel"
                           className="btn btn-sm btn-error btn-outline rounded-full p-2"
                           onClick={() => setSelectedId(hotel._id)}
                         >
                           <Trash2 size={18} />
                         </button>
-
-                        <span className="absolute -top-10 left-1/2 -translate-x-1/2 
-                     bg-black text-white text-xs px-2 py-1 
-                     rounded opacity-0 group-hover:opacity-100 
-                     transition pointer-events-none">
-                          Delete
-                        </span>
                       </div>
 
                     </div>
@@ -252,6 +240,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* DELETE MODAL */}
       {selectedId && (
         <dialog className="modal modal-open backdrop-blur-sm">
           <div className="modal-box max-w-2xl p-10 text-center rounded-3xl shadow-2xl">

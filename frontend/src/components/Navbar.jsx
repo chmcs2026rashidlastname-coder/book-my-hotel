@@ -7,7 +7,8 @@ export default function Navbar() {
   return (
     <div
       className="navbar fixed top-0 z-50 h-20
-                 bg-base-100 shadow-md border-b border-base-300
+                 bg-base-100/80 backdrop-blur-md
+                 shadow-md border-b border-base-300
                  px-4 sm:px-8 lg:px-12"
     >
       {/* LEFT SECTION */}
@@ -15,7 +16,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div className="dropdown lg:hidden">
-          <label tabIndex={0} className="btn btn-ghost">
+          <label tabIndex={0} className="btn btn-ghost" aria-label="Open Menu">
             <Menu size={30} />
           </label>
 
@@ -33,25 +34,15 @@ export default function Navbar() {
           </ul>
         </div>
 
-        {/* Back Button (Bigger + Custom Tooltip) */}
-        <div className="relative group">
+        {/* Back Button with DaisyUI Tooltip */}
+        <div className="tooltip tooltip-bottom" data-tip="Go Back">
           <button
+            aria-label="Go Back"
             onClick={() => navigate(-1)}
             className="btn btn-ghost"
           >
             <span className="text-3xl font-bold">←</span>
           </button>
-
-          <span
-            className="absolute -bottom-10 left-1/2 -translate-x-1/2
-                       bg-black text-white text-sm px-3 py-1.5
-                       rounded-md shadow-lg
-                       opacity-0 group-hover:opacity-100
-                       transition duration-200
-                       pointer-events-none whitespace-nowrap"
-          >
-            Go Back
-          </span>
         </div>
 
       </div>
@@ -72,48 +63,28 @@ export default function Navbar() {
       <div className="navbar-end hidden lg:flex gap-6">
 
         {/* Home Button */}
-        <div className="relative group">
+        <div className="tooltip tooltip-bottom" data-tip="Go to Home">
           <Link
             to="/"
+            aria-label="Home"
             className="btn btn-ghost text-lg 
                        hover:bg-primary/10 
                        hover:scale-105 transition"
           >
             Home
           </Link>
-
-          <span
-            className="absolute -bottom-10 left-1/2 -translate-x-1/2
-                       bg-black text-white text-sm px-3 py-1.5
-                       rounded-md shadow-lg
-                       opacity-0 group-hover:opacity-100
-                       transition duration-200
-                       pointer-events-none whitespace-nowrap"
-          >
-            Go to Home
-          </span>
         </div>
 
         {/* Add Hotel Button */}
-        <div className="relative group">
+        <div className="tooltip tooltip-bottom" data-tip="Add New Hotel">
           <Link
             to="/add"
+            aria-label="Add Hotel"
             className="btn btn-primary text-lg 
                        hover:scale-105 transition"
           >
             Add Hotel
           </Link>
-
-          <span
-            className="absolute -bottom-10 left-1/2 -translate-x-1/2
-                       bg-black text-white text-sm px-3 py-1.5
-                       rounded-md shadow-lg
-                       opacity-0 group-hover:opacity-100
-                       transition duration-200
-                       pointer-events-none whitespace-nowrap"
-          >
-            Add New Hotel
-          </span>
         </div>
 
       </div>

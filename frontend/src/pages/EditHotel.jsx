@@ -25,7 +25,7 @@ export default function EditHotel() {
 
         setForm({
           ...hotel,
-          images: hotel.images?.join(",")
+          images: hotel.images ? hotel.images.join(", ") : ""
         });
       } catch (err) {
         toast.error("Failed to load hotel ❌");
@@ -44,7 +44,9 @@ export default function EditHotel() {
     try {
       await api.put(`/hotels/${id}`, {
         ...form,
-        images: form.images.split(",")
+        images: form.images
+          ? form.images.split(",").map((url) => url.trim())
+          : []
       });
 
       toast.success("Hotel updated successfully ✏️");
@@ -131,7 +133,7 @@ export default function EditHotel() {
             type="submit"
             className="btn btn-success btn-lg md:col-span-2 
                        text-xl font-semibold 
-                       hover:scale-105 transition duration-300"
+                       hover:scale-105 transition duration-300 gap-2"
           >
             <Save size={24} />
             Update Hotel
