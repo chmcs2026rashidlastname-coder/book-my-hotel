@@ -131,11 +131,11 @@ export default function Home() {
 
               {hotels.map((hotel) => (
                 <HotelCard
-  key={hotel._id}
-  hotel={hotel}
-  setSelectedId={setSelectedId}
-  formatDateTime={formatDateTime}
-/>
+                  key={hotel._id}
+                  hotel={hotel}
+                  setSelectedId={setSelectedId}
+                  formatDateTime={formatDateTime}
+                />
               ))}
 
             </div>
@@ -146,14 +146,14 @@ export default function Home() {
 
       {/* DELETE MODAL */}
       <DeleteModal
-  selectedId={selectedId}
-  setSelectedId={setSelectedId}
-  fetchHotels={fetchHotels}
-/>
-              
-            
+        selectedId={selectedId}
+        setSelectedId={setSelectedId}
+        fetchHotels={fetchHotels}
+      />
 
-          
+
+
+
     </div>
   );
 }
