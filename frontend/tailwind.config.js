@@ -10,6 +10,6 @@ module.exports = {
   plugins: [require("daisyui")],
 
   daisyui: {
-    themes: ["forest"],   // 👈 This sets forest theme
+    themes: ["forest","synthwave"],   // 👈 This sets forest theme
   },
 }
