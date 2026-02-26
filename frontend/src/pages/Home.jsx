@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { toast } from "react-hot-toast";
+import HotelCard from "../components/HotelCard";
+import DeleteModal from "../components/DeleteModal";
 import {
   Eye,
   Pencil,
@@ -128,110 +130,12 @@ export default function Home() {
               )}
 
               {hotels.map((hotel) => (
-                <div
-                  key={hotel._id}
-                  className="card bg-base-100 shadow-xl hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 rounded-3xl"
-                >
-                  <figure
-                    className="overflow-hidden cursor-pointer"
-                    onClick={() => navigate(`/hotel/${hotel._id}`)}
-                  >
-                    <img
-                      src={
-                        hotel.images?.[0] ||
-                        "https://images.unsplash.com/photo-1566073771259-6a8506099945"
-                      }
-                      alt="hotel"
-                      className="w-full aspect-[4/3] object-cover 
-                                 hover:scale-110 transition duration-700"
-                    />
-                  </figure>
-
-                  <div className="card-body">
-
-                    <div className="flex justify-between items-center">
-                      <h2 className="card-title text-lg">
-                        {hotel.title}
-                      </h2>
-                      <div className="badge badge-primary badge-outline">
-                        {hotel.category}
-                      </div>
-                    </div>
-
-                    <p className="text-sm text-base-content/70 line-clamp-2">
-                      {hotel.description}
-                    </p>
-
-                    <div className="flex justify-between items-center mt-3">
-                      <span className="text-xl font-bold text-primary">
-                        ₹ {hotel.price}
-                      </span>
-
-                      <span className="flex items-center gap-1 text-sm">
-                        <MapPin size={14} />
-                        {hotel.location}
-                      </span>
-                    </div>
-
-                    <div className="mt-4 pt-4 border-t border-base-300 text-xs">
-
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-base-content/70">
-                          📅 Created
-                        </span>
-                        <span className="font-medium text-base-content/80">
-                          {formatDateTime(hotel.createdAt)}
-                        </span>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <span className="text-base-content/70">
-                          🔄 Updated
-                        </span>
-                        <span className="font-medium text-base-content/80">
-                          {formatDateTime(hotel.updatedAt)}
-                        </span>
-                      </div>
-
-                    </div>
-
-                    {/* ✅ CLEAN TOOLTIP BUTTONS */}
-                    <div className="flex items-center gap-5 mt-6">
-
-                      <div className="tooltip tooltip-top" data-tip="View">
-                        <button
-                          aria-label="View Hotel"
-                          className="btn btn-sm btn-info btn-outline rounded-full p-2"
-                          onClick={() => navigate(`/hotel/${hotel._id}`)}
-                        >
-                          <Eye size={18} />
-                        </button>
-                      </div>
-
-                      <div className="tooltip tooltip-top" data-tip="Edit">
-                        <button
-                          aria-label="Edit Hotel"
-                          className="btn btn-sm btn-success btn-outline rounded-full p-2"
-                          onClick={() => navigate(`/edit/${hotel._id}`)}
-                        >
-                          <Pencil size={18} />
-                        </button>
-                      </div>
-
-                      <div className="tooltip tooltip-top" data-tip="Delete">
-                        <button
-                          aria-label="Delete Hotel"
-                          className="btn btn-sm btn-error btn-outline rounded-full p-2"
-                          onClick={() => setSelectedId(hotel._id)}
-                        >
-                          <Trash2 size={18} />
-                        </button>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </div>
+                <HotelCard
+  key={hotel._id}
+  hotel={hotel}
+  setSelectedId={setSelectedId}
+  formatDateTime={formatDateTime}
+/>
               ))}
 
             </div>
@@ -241,56 +145,15 @@ export default function Home() {
       </div>
 
       {/* DELETE MODAL */}
-      {selectedId && (
-        <dialog className="modal modal-open backdrop-blur-sm">
-          <div className="modal-box max-w-2xl p-10 text-center rounded-3xl shadow-2xl">
+      <DeleteModal
+  selectedId={selectedId}
+  setSelectedId={setSelectedId}
+  fetchHotels={fetchHotels}
+/>
+              
+            
 
-            <div className="flex justify-center mb-6">
-              <div className="bg-error/10 p-6 rounded-full">
-                <Trash2 size={56} className="text-error" />
-              </div>
-            </div>
-
-            <h3 className="text-3xl font-extrabold text-error mb-4">
-              Delete Hotel?
-            </h3>
-
-            <p className="text-lg text-base-content/70 mb-10">
-              This action cannot be undone.
-              Are you sure you want to permanently remove this hotel?
-            </p>
-
-            <div className="flex justify-center gap-8">
-
-              <button
-                className="btn btn-outline btn-lg px-8"
-                onClick={() => setSelectedId(null)}
-              >
-                Cancel
-              </button>
-
-              <button
-                className="btn btn-error btn-lg px-8"
-                onClick={async () => {
-                  try {
-                    await api.delete(`/hotels/${selectedId}`);
-                    toast.success("Hotel deleted successfully 🗑️");
-                    setSelectedId(null);
-                    fetchHotels();
-                  } catch {
-                    toast.error("Delete failed ❌");
-                  }
-                }}
-              >
-                Yes, Delete
-              </button>
-
-            </div>
-
-          </div>
-        </dialog>
-      )}
-
+          
     </div>
   );
 }
