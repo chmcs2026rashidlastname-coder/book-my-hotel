@@ -147,7 +147,7 @@ List refreshes
 🏠 Home.jsx (Core Page)
 Responsibilities:
 
-![Home page](Rashid 049/assets/screenshots/Home-page.png)
+![Home page](assets/screenshots/Home-page.png)
 
 
 
