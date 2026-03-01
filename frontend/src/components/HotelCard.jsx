@@ -7,8 +7,10 @@ export default function HotelCard({ hotel, setSelectedId, formatDateTime }) {
   return (
     <div
       className="card bg-base-100 shadow-xl hover:shadow-2xl 
-                 hover:-translate-y-3 transition-all duration-500 rounded-3xl"
+                 hover:-translate-y-3 transition-all duration-500 
+                 rounded-3xl"
     >
+      {/* IMAGE */}
       <figure
         className="overflow-hidden cursor-pointer"
         onClick={() => navigate(`/hotel/${hotel._id}`)}
@@ -25,7 +27,7 @@ export default function HotelCard({ hotel, setSelectedId, formatDateTime }) {
       </figure>
 
       <div className="card-body">
-
+        {/* TITLE + CATEGORY */}
         <div className="flex justify-between items-center">
           <h2 className="card-title text-lg">
             {hotel.title}
@@ -35,10 +37,12 @@ export default function HotelCard({ hotel, setSelectedId, formatDateTime }) {
           </div>
         </div>
 
+        {/* DESCRIPTION */}
         <p className="text-sm text-base-content/70 line-clamp-2">
           {hotel.description}
         </p>
 
+        {/* PRICE + LOCATION */}
         <div className="flex justify-between items-center mt-3">
           <span className="text-xl font-bold text-primary">
             ₹ {hotel.price}
@@ -50,8 +54,8 @@ export default function HotelCard({ hotel, setSelectedId, formatDateTime }) {
           </span>
         </div>
 
+        {/* DATE INFO */}
         <div className="mt-4 pt-4 border-t border-base-300 text-xs">
-
           <div className="flex justify-between items-center mb-1">
             <span className="text-base-content/70">
               📅 Created
@@ -69,31 +73,40 @@ export default function HotelCard({ hotel, setSelectedId, formatDateTime }) {
               {formatDateTime(hotel.updatedAt)}
             </span>
           </div>
-
         </div>
 
+        {/* ACTION BUTTONS WITH TOOLTIP */}
         <div className="flex items-center gap-5 mt-6">
 
-          <button
-            className="btn btn-sm btn-info btn-outline rounded-full p-2"
-            onClick={() => navigate(`/hotel/${hotel._id}`)}
-          >
-            <Eye size={18} />
-          </button>
+          {/* VIEW */}
+          <div className="tooltip tooltip-top z-50" data-tip="View">
+            <button
+              className="btn btn-sm btn-info btn-outline rounded-full p-2"
+              onClick={() => navigate(`/hotel/${hotel._id}`)}
+            >
+              <Eye size={18} />
+            </button>
+          </div>
 
-          <button
-            className="btn btn-sm btn-success btn-outline rounded-full p-2"
-            onClick={() => navigate(`/edit/${hotel._id}`)}
-          >
-            <Pencil size={18} />
-          </button>
+          {/* EDIT */}
+          <div className="tooltip tooltip-top z-50" data-tip="Edit">
+            <button
+              className="btn btn-sm btn-success btn-outline rounded-full p-2"
+              onClick={() => navigate(`/edit/${hotel._id}`)}
+            >
+              <Pencil size={18} />
+            </button>
+          </div>
 
-          <button
-            className="btn btn-sm btn-error btn-outline rounded-full p-2"
-            onClick={() => setSelectedId(hotel._id)}
-          >
-            <Trash2 size={18} />
-          </button>
+          {/* DELETE */}
+          <div className="tooltip tooltip-top z-50" data-tip="Delete">
+            <button
+              className="btn btn-sm btn-error btn-outline rounded-full p-2"
+              onClick={() => setSelectedId(hotel._id)}
+            >
+              <Trash2 size={18} />
+            </button>
+          </div>
 
         </div>
 
