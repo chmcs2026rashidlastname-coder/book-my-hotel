@@ -149,7 +149,7 @@ List refreshes
 🏠 Home.jsx (Core Page)
 Responsibilities:
 
-![Home page](assets/screenshots/Home page 1.png)
+![Home page](assets/screenshots/Home-page.png)
 
 
 
@@ -176,7 +176,7 @@ Prevents excessive API calls when typing fast.
 
 🏨 HotelCard.jsx
 
-![Card](assets/screenshots/card.png)
+![card](assets/screenshots/card.png)
 
 Reusable UI component.
 
@@ -206,7 +206,7 @@ className="tooltip"
 data-tip="View"
 🗑 DeleteModal.jsx
 
-![Delete Hotel](assets/screenshots/Delete Hotel.png)
+![Delete Hotel](assets/screenshots/Delete-Hotel.png)
 
 Uses <dialog> element.
 
@@ -225,7 +225,7 @@ List refresh
 
 ➕ AddHotel.jsx
 
-![Add Hotels](assets/screenshots/Add Hotel.png)
+![Add Hotels](assets/screenshots/Add-Hotel.png)
 
 Handles:
 
@@ -242,7 +242,7 @@ Error handling
 
 ✏ EditHotel.jsx
 
-![Edit Hotels](assets/screenshots/Edit Hotel.png)
+![Edit Hotels](assets/screenshots/Edit-Hotel.png)
 
 Similar to AddHotel but:
 
@@ -255,7 +255,7 @@ PUT request
 📄 HotelDetails.jsx
 
 
-![View Hotel](assets/screenshots/View Hotel.png)
+![View Hotel](assets/screenshots/View-Hotel.png)
 
 Advanced layout:
 
